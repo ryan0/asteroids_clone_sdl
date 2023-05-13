@@ -12,7 +12,7 @@ int main(int argc, char* args[]) {
     SDL_Init(SDL_INIT_AUDIO);
 
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
-    Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 2048);
+    Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 4096);
 
     Window window("Asteroids", 1920, 1080);
     window.open();

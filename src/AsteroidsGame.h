@@ -39,6 +39,7 @@ private:
     Texture asteroidTex;
 
     SoundEffect laserSound;
+    SoundEffect thrustSound;
     SoundEffect largeBangSound;
 
     void moveObjectsWithinBounds();

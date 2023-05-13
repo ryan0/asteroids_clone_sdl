@@ -6,12 +6,18 @@
 #include "Player.h"
 #include "AsteroidsGame.h"
 
-Player::Player() = default;
 
-Player::Player(Texture* shipTexRef, SoundEffect* laserSoundRef, AsteroidsGame* gameRef)
-    : shipSprite(shipTexRef), gameRef(gameRef), laserSoundRef(laserSoundRef),
+Player::Player(Texture* shipTexRef, SoundEffect* laserSoundRef, SoundEffect* thrustSound, AsteroidsGame* gameRef)
+    : shipSprite(shipTexRef), shipThrustAni(shipSprite), gameRef(gameRef),
+      laserSoundRef(laserSoundRef), thrustSoundRef(thrustSound),
       collider(std::make_shared<BoxCollider>(4, 4, 25, 25))
 {
+    shipSprite.setSrcRect({0, 0, 32, 32});
+
+    for(int i = 0; i < 8; i++) {
+        shipThrustAni.addFrame({i* 32, 32, 32, 32});
+    }
+
     collider->setOutSignal("Player");
 }
 
@@ -47,21 +53,31 @@ void Player::handleEvent(const SDL_Event& event) {
 void Player::checkCollisionSignals() {
     for(const std::string& s : collider->getReceivedSignals()) {
         if(s == "Asteroid") {
-            std::cout<<"Player hit An Asteroid!!!"<<std::endl;
+            hitAsteroid = true;
+            thrustOn = false;
+            thrustSoundRef->stop(200);
         }
     }
 }
 
+bool Player::shouldDelete() const {
+    return hitAsteroid;
+}
+
 void Player::checkKeyStates() {
-    Vector2f direction = rotatedBy({.05f, 0.0f}, rotation);
+    Vector2f direction = rotatedBy({.02f, 0.0f}, rotation);
     const Uint8* currentKeyStates = SDL_GetKeyboardState(nullptr);
+
+    thrustOn = false;
 
     if(currentKeyStates[SDL_SCANCODE_W]) {
         velocity = velocity + direction;
+        thrustOn = true;
+        thrustSoundRef->loop();
+    } else{
+        thrustSoundRef->stop(500);
     }
-    if(currentKeyStates[SDL_SCANCODE_S]) {
-        velocity = velocity - direction;
-    }
+
     if(currentKeyStates[SDL_SCANCODE_D]) {
         rotation += 2;
     }
@@ -71,9 +87,16 @@ void Player::checkKeyStates() {
 }
 
 void Player::render(SDL_Renderer* renderer) {
-    shipSprite.setDestRect({position.x, position.y, 32, 32});
-    shipSprite.setRotation(rotation);
-    shipSprite.render(renderer);
+    if(thrustOn) {
+        shipThrustAni.update();
+        shipThrustAni.setDestRect({position.x, position.y, 32, 32});
+        shipThrustAni.setRotation(rotation);
+        shipThrustAni.render(renderer);
+    } else {
+        shipSprite.setDestRect({position.x, position.y, 32, 32});
+        shipSprite.setRotation(rotation);
+        shipSprite.render(renderer);
+    }
 
 //    collider->render(renderer);
 }

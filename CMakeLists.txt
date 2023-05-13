@@ -3,7 +3,7 @@ project(asteroids_clone_sdl)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(asteroids_clone_sdl src/main.cpp src/Window.cpp src/Window.h src/StartMenu.cpp src/StartMenu.h src/Texture.cpp src/Texture.h src/Vector2.inl src/Vector2.h src/Button.cpp src/Button.h src/Rect.h src/Rect.inl src/AsteroidsGame.cpp src/AsteroidsGame.h src/Player.cpp src/Player.h src/Sprite.cpp src/Sprite.h src/Vector2.cpp src/Asteroid.cpp src/Asteroid.h src/Scene.h src/Laser.cpp src/Laser.h src/BoxCollider.cpp src/BoxCollider.h src/CollisionSystem.cpp src/CollisionSystem.h src/GameObject.cpp src/GameObject.h src/SoundEffect.cpp src/SoundEffect.h)
+add_executable(asteroids_clone_sdl src/main.cpp src/Window.cpp src/Window.h src/StartMenu.cpp src/StartMenu.h src/Texture.cpp src/Texture.h src/Vector2.inl src/Vector2.h src/Button.cpp src/Button.h src/Rect.h src/Rect.inl src/AsteroidsGame.cpp src/AsteroidsGame.h src/Player.cpp src/Player.h src/Sprite.cpp src/Sprite.h src/Vector2.cpp src/Asteroid.cpp src/Asteroid.h src/Scene.h src/Laser.cpp src/Laser.h src/BoxCollider.cpp src/BoxCollider.h src/CollisionSystem.cpp src/CollisionSystem.h src/GameObject.cpp src/GameObject.h src/SoundEffect.cpp src/SoundEffect.h src/Animation.cpp src/Animation.h)
 
 set(SDL2_INCLUDE_DIR "" CACHE PATH "Path to SDL2 include directory")
 set(SDL2_LIB_DIR  "" CACHE PATH "Path to SDL2 lib directory")

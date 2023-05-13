@@ -13,10 +13,15 @@ public:
     SoundEffect();
     bool loadFromFile(const std::string& filename);
     void play();
+    void loop();
+    bool isPLaying();
+    void stop(int fade = 0);
     void free();
     ~SoundEffect();
 private:
+    bool isPlaying = false;
     Mix_Chunk* chunkRef = nullptr;
+    int channel = 0;
 };
 
 

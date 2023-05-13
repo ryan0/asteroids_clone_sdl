@@ -11,7 +11,7 @@
 class Sprite {
 public:
     Sprite();
-    Sprite(Texture* textureRef);
+    explicit Sprite(Texture* textureRef);
 
     void render(SDL_Renderer* renderer);
 

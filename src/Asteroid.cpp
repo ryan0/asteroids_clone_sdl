@@ -64,7 +64,7 @@ void Asteroid::checkCollisionSignals() {
         if(s == "Asteroid") {
             std::cout<<"Asteroid hit An Asteroid!!!"<<std::endl;
         }
-        if(s == "Laser") {
+        if(s == "Laser" || s == "Player") {
             std::cout<<"Laser hit An Asteroid!!!"<<std::endl;
             isHitByLaser = true;
             largeBangSoundRef->play();

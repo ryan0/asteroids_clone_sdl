@@ -22,7 +22,25 @@ bool SoundEffect::loadFromFile(const std::string& filename) {
 }
 
 void SoundEffect::play() {
-    Mix_PlayChannel(-1, chunkRef, 0);
+    channel = Mix_PlayChannel(-1, chunkRef, 0);
+}
+
+void SoundEffect::loop() {
+    if(!isPlaying) {
+        channel = Mix_PlayChannel(-1, chunkRef, -1);
+        isPlaying = true;
+    }
+}
+
+void SoundEffect::stop(int fade) {
+    if(isPlaying) {
+        Mix_FadeOutChannel(channel, fade);
+        isPlaying = false;
+    }
+}
+
+bool SoundEffect::isPLaying() {
+    return isPlaying;
 }
 
 void SoundEffect::free() {
