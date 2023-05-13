@@ -7,7 +7,7 @@
 
 SoundEffect::SoundEffect() = default;
 
-bool SoundEffect::loadFromFile(std::string filename) {
+bool SoundEffect::loadFromFile(const std::string& filename) {
     free();
 
     bool success = false;

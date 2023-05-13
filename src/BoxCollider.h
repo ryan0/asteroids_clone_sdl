@@ -20,8 +20,9 @@ public:
     void setOutSignal(const std::string& signal);
     const std::vector<std::string>& getReceivedSignals();
     void clearSignals();
-
     void render(SDL_Renderer* renderer) const;
+    [[nodiscard]] float getWidth() const;
+    [[nodiscard]] float getHeight() const;
 
 private:
     std::string outSignal = "Default";

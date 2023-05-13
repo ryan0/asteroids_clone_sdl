@@ -20,9 +20,6 @@ void BoxCollider::checkCollision(BoxCollider* collisionBox) {
     if(transformed.intersects(otherTransformed)) {
         receivedSignals.push_back(collisionBox->outSignal);
         collisionBox->receivedSignals.push_back(outSignal);
-
-        //std::cout<<outSignal<<std::endl;
-        //std::cout<<collisionBox->outSignal<<std::endl;
     }
 }
 
@@ -42,4 +39,12 @@ const std::vector<std::string> &BoxCollider::getReceivedSignals() {
 
 void BoxCollider::clearSignals() {
     receivedSignals.clear();
+}
+
+float BoxCollider::getWidth() const {
+    return rect.width;
+}
+
+float BoxCollider::getHeight() const {
+    return rect.height;
 }

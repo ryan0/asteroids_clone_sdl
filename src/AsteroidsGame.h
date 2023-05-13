@@ -25,16 +25,18 @@ public:
     void handleEvent(const SDL_Event& event) override;
 
     void spawnLaser(Vector2f position, Vector2f velocity);
+    void spawnAsteroids(std::vector<std::unique_ptr<Asteroid>> asteroids);
 
 private:
     CollisionSystem collisionSystem;
 
     using gameObjPtr = std::unique_ptr<GameObject>;
     std::vector<gameObjPtr> gameObjects;
-    gameObjPtr newObj = nullptr;
 
-    Texture shipTex{};
-    Texture asteroidTex{};
+    std::vector<gameObjPtr> spawnedObjects;
+
+    Texture shipTex;
+    Texture asteroidTex;
 
     SoundEffect laserSound;
     SoundEffect largeBangSound;

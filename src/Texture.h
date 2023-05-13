@@ -16,8 +16,8 @@ public:
     bool loadFromFile(SDL_Renderer* renderer,  std::string fileName);
     void free();
     SDL_Texture* getTextureRef();
-    int getWidth() const;
-    int getHeight() const;
+    [[nodiscard]] int getWidth() const;
+    [[nodiscard]] int getHeight() const;
 
 private:
     SDL_Texture* textureRef = nullptr;

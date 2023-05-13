@@ -18,15 +18,15 @@ AsteroidsGame::AsteroidsGame(SDL_Renderer *renderer) {
     gameObjects.push_back(std::move(player));
 
     std::unique_ptr<Asteroid> asteroid;
-    asteroid = std::make_unique<Asteroid>(&asteroidTex, &largeBangSound, Vector2f(200.0f, 200.0f), Vector2f(0.05f, 0.1f));
+    asteroid = std::make_unique<Asteroid>(this, &asteroidTex, &largeBangSound, Vector2f(200.0f, 200.0f), Vector2f(0.05f, 0.1f));
     collisionSystem.addToPhysicsSystem(asteroid->getBoxCollider());
     gameObjects.push_back(std::move(asteroid));
 
-    asteroid = std::make_unique<Asteroid>(&asteroidTex, &largeBangSound, Vector2f(500.0f, 100.0f), Vector2f(0.1f, 0.05f));
+    asteroid = std::make_unique<Asteroid>(this, &asteroidTex, &largeBangSound, Vector2f(500.0f, 100.0f), Vector2f(0.1f, 0.05f));
     collisionSystem.addToPhysicsSystem(asteroid->getBoxCollider());
     gameObjects.push_back(std::move(asteroid));
 
-    asteroid = std::make_unique<Asteroid>(&asteroidTex, &largeBangSound, Vector2f(400.0f, 300.0f), Vector2f(0.05f, -0.1f));
+    asteroid = std::make_unique<Asteroid>(this, &asteroidTex, &largeBangSound, Vector2f(400.0f, 300.0f), Vector2f(0.05f, -0.1f));
     collisionSystem.addToPhysicsSystem(asteroid->getBoxCollider());
     gameObjects.push_back(std::move(asteroid));
 }
@@ -42,9 +42,9 @@ void AsteroidsGame::update() {
         }
     }
 
-    if(newObj != nullptr) {
-        gameObjects.push_back(std::move(newObj));
-        newObj = nullptr;
+    while (!spawnedObjects.empty()) {
+        gameObjects.push_back(std::move(spawnedObjects.back()));
+        spawnedObjects.pop_back();
     }
 
     moveObjectsWithinBounds();
@@ -71,7 +71,14 @@ void AsteroidsGame::handleEvent(const SDL_Event& event) {
 void AsteroidsGame::spawnLaser(Vector2f position, Vector2f velocity) {
     auto laser = std::make_unique<Laser>(position, velocity);
     collisionSystem.addToPhysicsSystem(laser->getBoxCollider());
-    newObj = std::move(laser);
+    spawnedObjects.push_back(std::move(laser));
+}
+
+void AsteroidsGame::spawnAsteroids(std::vector<std::unique_ptr<Asteroid>> asteroids) {
+    for(auto& i : asteroids) {
+        collisionSystem.addToPhysicsSystem(i->getBoxCollider());
+        spawnedObjects.push_back(std::move(i));
+    }
 }
 
 void AsteroidsGame::moveObjectsWithinBounds() {

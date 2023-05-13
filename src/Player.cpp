@@ -75,7 +75,7 @@ void Player::render(SDL_Renderer* renderer) {
     shipSprite.setRotation(rotation);
     shipSprite.render(renderer);
 
-    collider->render(renderer);
+//    collider->render(renderer);
 }
 
 std::shared_ptr<BoxCollider> Player::getCollider() {

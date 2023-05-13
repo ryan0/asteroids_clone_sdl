@@ -16,6 +16,12 @@ void Laser::update() {
     position = position + velocity;
     collider->setOffset(position);
 
+    for(const std::string& s : collider->getReceivedSignals()) {
+        if (s == "Asteroid") {
+            ticksLeft = 0;
+        }
+    }
+
     if(ticksLeft > 0) {
         ticksLeft -= 1;
     }
@@ -26,7 +32,7 @@ void Laser::render(SDL_Renderer *renderer) {
     SDL_FRect drawRect{position.x, position.y, 3, 3};
     SDL_RenderFillRectF(renderer, &drawRect);
 
-    collider->render(renderer);
+//    collider->render(renderer);
 }
 
 bool Laser::shouldDelete() const {

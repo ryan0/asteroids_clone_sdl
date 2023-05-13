@@ -11,7 +11,7 @@
 class SoundEffect {
 public:
     SoundEffect();
-    bool loadFromFile(std::string filename);
+    bool loadFromFile(const std::string& filename);
     void play();
     void free();
     ~SoundEffect();
