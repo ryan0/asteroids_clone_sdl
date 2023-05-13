@@ -8,8 +8,8 @@
 
 Player::Player() = default;
 
-Player::Player(Texture* shipTexRef, AsteroidsGame* gameRef)
-    : shipSprite(shipTexRef), gameRef(gameRef),
+Player::Player(Texture* shipTexRef, SoundEffect* laserSoundRef, AsteroidsGame* gameRef)
+    : shipSprite(shipTexRef), gameRef(gameRef), laserSoundRef(laserSoundRef),
       collider(std::make_shared<BoxCollider>(4, 4, 25, 25))
 {
     collider->setOutSignal("Player");
@@ -40,6 +40,7 @@ void Player::handleEvent(const SDL_Event& event) {
         Vector2f laserVel = rotatedBy({5.0f, 0.0f}, rotation) + velocity;
         Vector2f laserPos = {position.x + 14, position.y + 14};
         gameRef->spawnLaser(laserPos, laserVel);
+        laserSoundRef->play();
     }
 }
 

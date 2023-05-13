@@ -13,13 +13,14 @@
 #include "Sprite.h"
 #include "Laser.h"
 #include "BoxCollider.h"
+#include "SoundEffect.h"
 
 class AsteroidsGame;
 
 class Player : public GameObject {
 public:
     Player();
-    Player(Texture* shipTexRef, AsteroidsGame* gameRef);
+    Player(Texture* shipTexRef, SoundEffect* laserSoundRef, AsteroidsGame* gameRef);
 
     void update() override;
     void handleEvent(const SDL_Event& event) override;
@@ -29,11 +30,11 @@ public:
 
 private:
     Vector2f velocity{0.0f, 0.0f};
-//    Vector2f position{300.0f, 150.0f};
     std::shared_ptr<BoxCollider> collider;
     Sprite shipSprite;
 
     AsteroidsGame* gameRef = nullptr;
+    SoundEffect* laserSoundRef = nullptr;
 
     static const int fireCoolDown = 10;
     int fireTimer = 0;

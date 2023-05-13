@@ -1,5 +1,5 @@
 //
-// Created by ryanm on 5/6/2023.
+// Created by ryan on 5/6/2023.
 //
 
 #include <SDL_image.h>

@@ -6,8 +6,9 @@
 
 Asteroid::Asteroid() = default;
 
-Asteroid::Asteroid(Texture *texture, Vector2f position, Vector2f velocity)
-    : GameObject(position), sprite(texture), velocity(velocity),
+Asteroid::Asteroid(Texture *texture, SoundEffect* largeBang, Vector2f position, Vector2f velocity)
+    : GameObject(position), sprite(texture), largeBangSoundRef(largeBang),
+    velocity(velocity),
     collider(std::make_shared<BoxCollider>(4, 4, 25, 25))
 {
     collider->setOutSignal("Asteroid");
@@ -40,6 +41,7 @@ void Asteroid::checkCollisionSignals() {
         if(s == "Laser") {
             std::cout<<"Laser hit An Asteroid!!!"<<std::endl;
             isHitByLaser = true;
+            largeBangSoundRef->play();
         }
     }
 }

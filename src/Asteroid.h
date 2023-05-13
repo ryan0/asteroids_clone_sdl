@@ -11,11 +11,12 @@
 #include "Vector2.h"
 #include "Sprite.h"
 #include "BoxCollider.h"
+#include "SoundEffect.h"
 
 class Asteroid : public GameObject {
 public:
     Asteroid();
-    explicit Asteroid(Texture* texture, Vector2f position, Vector2f velocity);
+    explicit Asteroid(Texture* texture, SoundEffect* largeBang, Vector2f position, Vector2f velocity);
 
     void update() override;
     void render(SDL_Renderer* renderer) override;
@@ -27,6 +28,8 @@ private:
     Sprite sprite;
     Vector2f velocity;
     std::shared_ptr<BoxCollider> collider;
+
+    SoundEffect* largeBangSoundRef;
 
     float rotationSpeed = 0.5f;
     float rotation = 0.0f;

@@ -14,6 +14,7 @@
 #include "Asteroid.h"
 #include "Laser.h"
 #include "Texture.h"
+#include "SoundEffect.h"
 
 class AsteroidsGame : public Scene {
 public:
@@ -34,6 +35,9 @@ private:
 
     Texture shipTex{};
     Texture asteroidTex{};
+
+    SoundEffect laserSound;
+    SoundEffect largeBangSound;
 
     void moveObjectsWithinBounds();
 };

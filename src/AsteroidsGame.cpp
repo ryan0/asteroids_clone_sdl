@@ -10,20 +10,23 @@ AsteroidsGame::AsteroidsGame(SDL_Renderer *renderer) {
     shipTex.loadFromFile(renderer, "../assets/Ship.png");
     asteroidTex.loadFromFile(renderer, "../assets/asteroid.png");
 
-    auto player = std::make_unique<Player>(&shipTex, this);
+    laserSound.loadFromFile("../assets/audio/fire.wav");
+    largeBangSound.loadFromFile("../assets/audio/bangLarge.wav");
+
+    auto player = std::make_unique<Player>(&shipTex, &laserSound, this);
     collisionSystem.addToPhysicsSystem(player->getCollider());
     gameObjects.push_back(std::move(player));
 
     std::unique_ptr<Asteroid> asteroid;
-    asteroid = std::make_unique<Asteroid>(&asteroidTex, Vector2f(200.0f, 200.0f), Vector2f(0.05f, 0.1f));
+    asteroid = std::make_unique<Asteroid>(&asteroidTex, &largeBangSound, Vector2f(200.0f, 200.0f), Vector2f(0.05f, 0.1f));
     collisionSystem.addToPhysicsSystem(asteroid->getBoxCollider());
     gameObjects.push_back(std::move(asteroid));
 
-    asteroid = std::make_unique<Asteroid>(&asteroidTex, Vector2f(500.0f, 100.0f), Vector2f(0.1f, 0.05f));
+    asteroid = std::make_unique<Asteroid>(&asteroidTex, &largeBangSound, Vector2f(500.0f, 100.0f), Vector2f(0.1f, 0.05f));
     collisionSystem.addToPhysicsSystem(asteroid->getBoxCollider());
     gameObjects.push_back(std::move(asteroid));
 
-    asteroid = std::make_unique<Asteroid>(&asteroidTex, Vector2f(400.0f, 300.0f), Vector2f(0.05f, -0.1f));
+    asteroid = std::make_unique<Asteroid>(&asteroidTex, &largeBangSound, Vector2f(400.0f, 300.0f), Vector2f(0.05f, -0.1f));
     collisionSystem.addToPhysicsSystem(asteroid->getBoxCollider());
     gameObjects.push_back(std::move(asteroid));
 }
