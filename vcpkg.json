@@ -1,0 +1,12 @@
+{
+  "name" : "asteroids-clone-sdl",
+  "version-string" : "1.0.0",
+  "builtin-baseline" : "c45ac46dcc16dd588daa029f7ce5bcacc5d7645b",
+  "dependencies" : [ {
+    "name" : "sdl2-image"
+  }, {
+    "name" : "sdl2-mixer"
+  }, {
+    "name" : "sdl2"
+  } ]
+}

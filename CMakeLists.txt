@@ -20,14 +20,13 @@ target_include_directories(asteroids_clone_sdl PUBLIC
     ${SDL2_MIXER_INCLUDE_DIR}
 )
 
-find_library(SDL2_MAIN_LIB SDL2main ${SDL2_LIB_DIR})
-find_library(SDL2_LIB SDL2 ${SDL2_LIB_DIR})
-find_library(SDL2_IMAGE_Lib SDL2_image ${SDL2_IMAGE_LIB_DIR})
-find_library(SDL2_MIXER_LIB SDL2_mixer ${SDL2_MIXER_LIB_DIR})
+find_package(SDL2 CONFIG REQUIRED)
+find_package(SDL2_image CONFIG REQUIRED)
+find_package(SDL2_mixer CONFIG REQUIRED)
 
 target_link_libraries(asteroids_clone_sdl PUBLIC
-        ${SDL2_MAIN_LIB}
-        ${SDL2_LIB}
-        ${SDL2_IMAGE_Lib}
-        ${SDL2_MIXER_LIB}
+        SDL2::SDL2main
+        SDL2::SDL2
+        SDL2_image::SDL2_image-static
+        SDL2_mixer::SDL2_mixer-static
 )

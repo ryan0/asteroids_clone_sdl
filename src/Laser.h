@@ -6,6 +6,7 @@
 #define ASTEROIDS_CLONE_SDL_LASER_H
 
 
+#include <memory>
 #include <SDL_render.h>
 #include "GameObject.h"
 #include "Vector2.h"
